@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LANDING · одностраничники в Республике</title>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0c0c0c;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            padding: 120px 0;
+            position: relative;
+        }
+
+        /* ФОН С МЯГКИМ ГРАДИЕНТОМ */
+        .gradient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle at 20% 30%, #2b1a2e, #0c0c0c 70%);
+            z-index: -1;
+        }
+
+        /* ШАПКА */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 900px;
+        }
+
+        .hero-label {
+            font-size: 1rem;
+            letter-spacing: 8px;
+            color: #a8a8a8;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        .hero-title {
+            font-family: 'Unbounded', cursive;
+            font-size: 5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #ffffff, #c0c0c0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-sub {
+            font-size: 1.4rem;
+            color: #a8a8a8;
+            margin-bottom: 20px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-location {
+            display: inline-block;
+            padding: 8px 24px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 100px;
+            color: #ffffff;
+            margin-bottom: 50px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .hero-btn {
+            display: inline-block;
+            padding: 18px 60px;
+            background: #ffffff;
+            color: #0c0c0c;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 100px;
+            transition: 0.3s;
+            letter-spacing: 2px;
+        }
+
+        .hero-btn:hover {
+            background: #e0e0e0;
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(255,255,255,0.1);
+        }
+
+        /* ЗАГОЛОВКИ СЕКЦИЙ */
+        .section-title {
+            font-family: 'Unbounded', cursive;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 60px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: #ffffff;
+        }
+
+        /* ПОЧЕМУ Я */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .feature-item {
+            padding: 40px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 30px;
+            transition: 0.3s;
+        }
+
+        .feature-item:hover {
+            background: rgba(255,255,255,0.04);
+            border-color: rgba(255,255,255,0.1);
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .feature-title {
+            font-family: 'Unbounded', cursive;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .feature-desc {
+            color: #a8a8a8;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        /* ПОРТФОЛИО */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .portfolio-item {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 30px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255,255,255,0.2);
+        }
+
+        .portfolio-image {
+            height: 240px;
+            background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .portfolio-content {
+            padding: 30px;
+        }
+
+        .portfolio-title {
+            font-family: 'Unbounded', cursive;
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+
+        .portfolio-category {
+            color: #a8a8a8;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .portfolio-link {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid transparent;
+            transition: 0.2s;
+        }
+
+        .portfolio-link:hover {
+            border-bottom-color: #ffffff;
+        }
+
+        /* ЦЕНЫ */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .pricing-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 40px;
+            padding: 50px 30px;
+            transition: 0.3s;
+        }
+
+        .pricing-card:hover {
+            background: rgba(255,255,255,0.04);
+            border-color: rgba(255,255,255,0.15);
+        }
+
+        .pricing-name {
+            font-family: 'Unbounded', cursive;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .pricing-price {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: #ffffff;
+        }
+
+        .pricing-price span {
+            font-size: 1rem;
+            color: #a8a8a8;
+            font-weight: 400;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 40px;
+        }
+
+        .pricing-features li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            color: #a8a8a8;
+        }
+
+        .pricing-btn {
+            display: inline-block;
+            width: 100%;
+            padding: 16px;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 100px;
+            font-weight: 500;
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .pricing-btn:hover {
+            background: #ffffff;
+            color: #0c0c0c;
+        }
+
+        /* КОНТАКТЫ */
+        .contact-section {
+            background: rgba(255,255,255,0.02);
+            border-radius: 60px;
+            padding: 80px 40px;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .contact-title {
+            font-family: 'Unbounded', cursive;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .contact-text {
+            color: #a8a8a8;
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: #ffffff;
+            color: #0c0c0c;
+            padding: 18px 50px;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: 0.3s;
+        }
+
+        .contact-btn:hover {
+            background: #e0e0e0;
+            transform: scale(1.05);
+        }
+
+        .contact-note {
+            margin-top: 30px;
+            color: #a8a8a8;
+            font-size: 0.9rem;
+        }
+
+        /* ПОДВАЛ */
+        .footer {
+            padding: 40px 0;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            color: #a8a8a8;
+        }
+
+        .footer-logo {
+            font-family: 'Unbounded', cursive;
+            font-size: 1.2rem;
+            color: #ffffff;
+        }
+
+        /* АДАПТАЦИЯ */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 4rem; }
+            .section-title { font-size: 2.2rem; }
+            .section { padding: 80px 0; }
+            .portfolio-grid { grid-template-columns: 1fr; }
+            .footer-content { flex-direction: column; text-align: center; }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title { font-size: 2.8rem; }
+            .hero-sub { font-size: 1.1rem; }
+            .pricing-price { font-size: 2.5rem; }
+            .contact-title { font-size: 1.8rem; }
+        }
+
+                /* КНОПКИ КАТЕГОРИЙ */
+        .category-btn {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #a8a8a8;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .category-btn:hover {
+            border-color: rgba(255,255,255,0.3);
+            color: #ffffff;
+        }
+
+        .category-btn.active {
+            background: #ffffff;
+            color: #0c0c0c;
+            border-color: #ffffff;
+        }
+
+        /* СЕТКА ПОРТФОЛИО */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .portfolio-item {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 24px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.04);
+        }
+
+        .portfolio-image {
+            height: 200px;
+            background: linear-gradient(135deg, #1e1e1e, #2a2a2a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .portfolio-content {
+            padding: 25px;
+        }
+
+        .portfolio-title {
+            font-family: 'Unbounded', cursive;
+            font-size: 1.2rem;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .portfolio-category {
+            color: #a8a8a8;
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .portfolio-link {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border-bottom: 1px solid transparent;
+            transition: 0.2s;
+        }
+
+        .portfolio-link:hover {
+            border-bottom-color: #ffffff;
+        }
+
+        /* АДАПТАЦИЯ */
+        @media (max-width: 768px) {
+            .category-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+    }
+</style>
+</head>
+<body>
+
+    <!-- ФОН -->
+    <div class="gradient-bg"></div>
+
+    <!-- ШАПКА -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-label">ВЕБ ТЕХНОЛОГИИ</div>
+            <h1 class="hero-title">LANDING_YKT</h1>
+            <p class="hero-sub">веб-пригласительные, одностраничные сайты портфолио, афиши.</p>
+            <a href="#contact" class="hero-btn">ОБСУДИТЬ ПРОЕКТ</a>
+        </div>
+    </section>
+
+    <!-- ПОЧЕМУ Я -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">ПОЧЕМУ МЫ?</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">⚡</div>
+                    <div class="feature-title">24 ЧАСА</div>
+                    <div class="feature-desc">Готовый сайт через сутки. Если горит — сделаю за вечер.</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">💰</div>
+                    <div class="feature-title">ДОСТУПНО</div>
+                    <div class="feature-desc">От 1 500 до 5 000 ₽.</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🧊</div>
+                    <div class="feature-title">КОНСУЛЬТАЦИЯ</div>
+                    <div class="feature-desc">Разберем, обсудим, сделаем. Разработка в Якутске. .</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🎨</div>
+                    <div class="feature-title">СОВРЕМЕННО</div>
+                    <div class="feature-desc">Чистый дизайн, который выглядит дорого и актуально.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ПОРТФОЛИО -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">ПРОЕКТЫ</h2>
+
+            <!-- КНОПКИ КАТЕГОРИЙ -->
+            <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-bottom: 50px;">
+                <button class="category-btn active" onclick="showCategory('invites')">🎉 Веб-пригласительные</button>
+                <button class="category-btn" onclick="showCategory('portfolio')">📁 Портфолио</button>
+                <button class="category-btn" onclick="showCategory('posters')">📅 Афиши</button>
+            </div>
+
+            <!-- КАТЕГОРИЯ: ВЕБ-ПРИГЛАСИТЕЛЬНЫЕ -->
+            <div id="invites" class="category-content" style="display: block;">
+                <div class="portfolio-grid">
+                    <!-- День Рождения -->
+                    <div class="portfolio-item">
+                        <div class="portfolio-image">🎂</div>
+                        <div class="portfolio-content">
+                            <div class="portfolio-title">День Рождения</div>
+                            <div class="portfolio-category">веб-пригласительное</div>
+                            <a href="https://hattory1009.github.io/happybirdsday50/" class="portfolio-link" target="_blank">смотреть →</a>
+                        </div>
+                    </div>
+                    <!-- Новоселье -->
+                    <div class="portfolio-item">
+                        <div class="portfolio-image">🏠</div>
+                        <div class="portfolio-content">
+                            <div class="portfolio-title">Новоселье</div>
+                            <div class="portfolio-category">веб-пригласительное</div>
+                            <a href="https://hattory1009.github.io/newhome1/" class="portfolio-link" target="_blank">смотреть →</a>
+                        </div>
+                    </div>
+                    <!-- Свадьба -->
+                    <div class="portfolio-item">
+                        <div class="portfolio-image">💍</div>
+                        <div class="portfolio-content">
+                            <div class="portfolio-title">Свадьба</div>
+                            <div class="portfolio-category">веб-пригласительное</div>
+                            <a href="https://hattory1009.github.io/wedding/" class="portfolio-link" target="_blank">смотреть →</a>
+                        </div>
+                    </div>
+                    <!-- Корпоратив -->
+                    <div class="portfolio-item">
+                        <div class="portfolio-image">💼</div>
+                        <div class="portfolio-content">
+                            <div class="portfolio-title">Корпоратив</div>
+                            <div class="portfolio-category">веб-пригласительное</div>
+                            <a href="https://hattory1009.github.io/corp/" class="portfolio-link" target="_blank">смотреть →</a>
+                        </div>
+                    </div>
+                    <!-- Вечеринка -->
+                    <div class="portfolio-item">
+                        <div class="portfolio-image">🎉</div>
+                        <div class="portfolio-content">
+                            <div class="portfolio-title">Вечеринка</div>
+                            <div class="portfolio-category">веб-пригласительное</div>
+                            <a href="https://hattory1009.github.io/party/" class="portfolio-link" target="_blank">смотреть →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- КАТЕГОРИЯ: ПОРТФОЛИО -->
+            <div id="portfolio" class="category-content" style="display: none;">
+                <div class="portfolio-grid">
+                    <!-- Дизайнер -->
+                    <div class="portfolio-item">
+                        <div class="portfolio-image">🎨</div>
+                        <div class="portfolio-content">
+                            <div class="portfolio-title">Дизайнер интерьеров</div>
+                            <div class="portfolio-category">портфолио</div>
+                            <a href="https://hattory1009.github.io/interier/" class="portfolio-link" target="_blank">смотреть →</a>
+                        </div>
+                    </div>
+                    <!-- Фотограф -->
+                    <div class="portfolio-item">
+                        <div class="portfolio-image">📸</div>
+                        <div class="portfolio-content">
+                            <div class="portfolio-title">Фотограф</div>
+                            <div class="portfolio-category">портфолио</div>
+                            <a href="https://hattory1009.github.io/photograph/" class="portfolio-link" target="_blank">смотреть →</a>
+                        </div>
+                    </div>
+                    <!-- Видеограф -->
+                    <div class="portfolio-item">
+                        <div class="portfolio-image">🎥</div>
+                        <div class="portfolio-content">
+                            <div class="portfolio-title">Видеограф</div>
+                            <div class="portfolio-category">портфолио</div>
+                            <a href="https://hattory1009.github.io/videograph/" class="portfolio-link" target="_blank">смотреть →</a>
+                        </div>
+                    </div>
+                    <!-- Преподователь -->
+                    <div class="portfolio-item">
+                        <div class="portfolio-image">🏛️</div>
+                        <div class="portfolio-content">
+                            <div class="portfolio-title">Преподователь</div>
+                            <div class="portfolio-category">портфолио</div>
+                            <a href="https://hattory1009.github.io/teacher/" class="portfolio-link" target="_blank">смотреть →</a>
+                        </div>
+                    </div>
+                    <!-- Художник -->
+                    <div class="portfolio-item">
+                        <div class="portfolio-image">🖼️</div>
+                        <div class="portfolio-content">
+                            <div class="portfolio-title">Художник</div>
+                            <div class="portfolio-category">портфолио</div>
+                            <a href="https://hattory1009.github.io/artist/" class="portfolio-link" target="_blank">смотреть →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- КАТЕГОРИЯ: АФИШИ -->
+            <div id="posters" class="category-content" style="display: none;">
+                <div class="portfolio-grid">
+                    <!-- Концерт -->
+                    <div class="portfolio-item">
+                        <div class="portfolio-image">🎤</div>
+                        <div class="portfolio-content">
+                            <div class="portfolio-title">Концерт</div>
+                            <div class="portfolio-category">афиша</div>
+                            <a href="https://hattory1009.github.io/consert/" class="portfolio-link" target="_blank">смотреть →</a>
+                        </div>
+                    </div>
+                    <!-- Спектакль -->
+                    <div class="portfolio-item">
+                        <div class="portfolio-image">🎭</div>
+                        <div class="portfolio-content">
+                            <div class="portfolio-title">Спектакль</div>
+                            <div class="portfolio-category">афиша</div>
+                            <a href="https://hattory1009.github.io/spektakl/" class="portfolio-link" target="_blank">смотреть →</a>
+                        </div>
+                    </div>
+                    <!-- Выставка -->
+                    <div class="portfolio-item">
+                        <div class="portfolio-image">🖼️</div>
+                        <div class="portfolio-content">
+                            <div class="portfolio-title">Выставка</div>
+                            <div class="portfolio-category">афиша</div>
+                            <a href="https://hattory1009.github.io/vyestuvka/" class="portfolio-link" target="_blank">смотреть →</a>
+                        </div>
+                    </div>
+                    <!-- Фестиваль -->
+                    <div class="portfolio-item">
+                        <div class="portfolio-image">🎪</div>
+                        <div class="portfolio-content">
+                            <div class="portfolio-title">Фестиваль</div>
+                            <div class="portfolio-category">афиша</div>
+                            <a href="https://hattory1009.github.io/fest/" class="portfolio-link" target="_blank">смотреть →</a>
+                        </div>
+                    </div>
+                    <!-- Лекция -->
+                    <div class="portfolio-item">
+                        <div class="portfolio-image">📚</div>
+                        <div class="portfolio-content">
+                            <div class="portfolio-title">Лекция</div>
+                            <div class="portfolio-category">афиша</div>
+                            <a href="https://hattory1009.github.io/masterclass/" class="portfolio-link" target="_blank">смотреть →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ЦЕНЫ -->
+    <!-- ЦЕНЫ -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">ЦЕНЫ</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-name">ПРИГЛ.</div>
+                    <div class="pricing-price">1 500 ₽</div>
+                    <ul class="pricing-features">
+                        <li>Готовый шаблон</li>
+                        <li>Ваши фото и текст</li>
+                        <li>Адаптация под телефон</li>
+                        <li>Бесплатный домен</li>
+                        <li>HTTPS</li>
+                    </ul>
+                    <a href="#contact" class="pricing-btn">ВЫБРАТЬ</a>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-name">ПОРТФОЛИО</div>
+                    <div class="pricing-price">3 000 ₽</div>
+                    <ul class="pricing-features">
+                        <li>Индивидуальный подход</li>
+                        <li>Анимация/эффекты</li>
+                        <li>2 правки бесплатно</li>
+                        <li>Фото/видео</li>
+                        <li>24 часа</li>
+                    </ul>
+                    <a href="#contact" class="pricing-btn">ВЫБРАТЬ</a>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-name">АФИША</div>
+                    <div class="pricing-price">от 3000 ₽</div>
+                    <ul class="pricing-features">
+                        <li>Индивидуальный дизайн</li>
+                        <li>Анимация/эффекты</li>
+                        <li>Счётчик/форма</li>
+                        <li>Ссылка на оплату</li>
+                        <li>24 часа</li>
+                    </ul>
+                    <a href="#contact" class="pricing-btn">ВЫБРАТЬ</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <div class="container">
+            <div class="contact-section">
+                <h2 class="contact-title">📬 НАПИСАТЬ</h2>
+                <p class="contact-text">
+                    Обсудим идею, я покажу варианты, сделаем круто и быстро
+                </p>
+
+                <!-- КНОПКИ МЕССЕНДЖЕРОВ -->
+                <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 30px;">
+                    <a href="https://t.me/beckbool" class="contact-btn" style="display: inline-flex; align-items: center; gap: 10px; background: #ffffff; color: #0c0c0c; padding: 18px 40px; border-radius: 100px; text-decoration: none; font-weight: 600; font-size: 1.1rem; transition: 0.3s;">
+                        <span>✈️</span> Telegram
+                    </a>
+                    <a href="https://wa.me/79991234567" class="contact-btn" style="display: inline-flex; align-items: center; gap: 10px; background: #25D366; color: #ffffff; padding: 18px 40px; border-radius: 100px; text-decoration: none; font-weight: 600; font-size: 1.1rem; transition: 0.3s;">
+                        <span>📱</span> WhatsApp
+                    </a>
+                </div>
+
+                <!-- КЛИКАБЕЛЬНЫЕ КОНТАКТЫ -->
+                <div style="margin-top: 30px; display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;">
+                    <a href="tel:+79245966989" style="display: flex; align-items: center; gap: 10px; color: #a8a8a8; text-decoration: none; transition: 0.3s; padding: 10px 20px; border: 1px solid rgba(255,255,255,0.1); border-radius: 60px;">
+                        <span style="font-size: 1.5rem;">📱</span>
+                        <span style="font-size: 1.1rem;">Позвонить</span>
+                    </a>
+                    <a href="mailto:landingykt@mail.ru" style="display: flex; align-items: center; gap: 10px; color: #a8a8a8; text-decoration: none; transition: 0.3s; padding: 10px 20px; border: 1px solid rgba(255,255,255,0.1); border-radius: 60px;">
+                        <span style="font-size: 1.5rem;">📧</span>
+                        <span style="font-size: 1.1rem;">landingykt@mail.ru</span>
+                    </a>
+                </div>
+
+                <p class="contact-note">
+                    Отвечаю быстро · Якутск и по всей Республике · 10:00–19:00
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ЧАСТЫЕ ВОПРОСЫ -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">ЧАСТЫЕ ВОПРОСЫ</h2>
+            <div style="max-width: 800px; margin: 40px auto 0;">
+
+                <!-- ВОПРОС 1 -->
+                <div style="margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    <div onclick="toggleFaq(this)" style="padding: 25px 0; display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+                        <span style="font-family: 'Unbounded', cursive; font-size: 1.2rem; font-weight: 600;">🤔 А какой адрес будет у сайта?</span>
+                        <span style="font-size: 1.5rem; transition: 0.3s;">+</span>
+                    </div>
+                    <div class="faq-answer" style="padding: 0 0 25px 0; display: none; color: #a8a8a8; line-height: 1.7;">
+                        Бесплатный адрес: <strong>ваш-логин.github.io/название</strong> — работает вечно, HTTPS включён. Если хотите красивый домен (например, «вашесобытие.рф») — покупаете сами за ~1500₽/год, я подключаю.
+                    </div>
+                </div>
+
+                <!-- ВОПРОС 2 -->
+                <div style="margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    <div onclick="toggleFaq(this)" style="padding: 25px 0; display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+                        <span style="font-family: 'Unbounded', cursive; font-size: 1.2rem; font-weight: 600;">⏱ Сколько времени делается сайт?</span>
+                        <span style="font-size: 1.5rem; transition: 0.3s;">+</span>
+                    </div>
+                    <div class="faq-answer" style="padding: 0 0 25px 0; display: none; color: #a8a8a8; line-height: 1.7;">
+                        Обычно 1–2 дня. Если срочно — могу за вечер. Вы всегда видите промежуточный результат и правите по ходу.
+                    </div>
+                </div>
+
+                <!-- ВОПРОС 3 -->
+                <div style="margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    <div onclick="toggleFaq(this)" style="padding: 25px 0; display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+                        <span style="font-family: 'Unbounded', cursive; font-size: 1.2rem; font-weight: 600;">💳 Как оплатить?</span>
+                        <span style="font-size: 1.5rem; transition: 0.3s;">+</span>
+                    </div>
+                    <div class="faq-answer" style="padding: 0 0 25px 0; display: none; color: #a8a8a8; line-height: 1.7;">
+                        Переводом на карту СБП (Сбер, Т-Банк) по ссылке или по номеру телефона. После готовности сайта. Предоплата не нужна.
+                    </div>
+                </div>
+
+                <!-- ВОПРОС 4 -->
+                <div style="margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    <div onclick="toggleFaq(this)" style="padding: 25px 0; display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+                        <span style="font-family: 'Unbounded', cursive; font-size: 1.2rem; font-weight: 600;">🖼 Что если я не умею подбирать фото?</span>
+                        <span style="font-size: 1.5rem; transition: 0.3s;">+</span>
+                    </div>
+                    <div class="faq-answer" style="padding: 0 0 25px 0; display: none; color: #a8a8a8; line-height: 1.7;">
+                        Помогу подобрать бесплатные стоковые фото или красиво сверстаю те, что есть у вас. Главное — вы присылаете идею, остальное я доделываю.
+                    </div>
+                </div>
+
+                <!-- ВОПРОС 5 -->
+                <div style="margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    <div onclick="toggleFaq(this)" style="padding: 25px 0; display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+                        <span style="font-family: 'Unbounded', cursive; font-size: 1.2rem; font-weight: 600;">📱 Сайт будет работать на телефонах?</span>
+                        <span style="font-size: 1.5rem; transition: 0.3s;">+</span>
+                    </div>
+                    <div class="faq-answer" style="padding: 0 0 25px 0; display: none; color: #a8a8a8; line-height: 1.7;">
+                        Да, все сайты адаптивные. Отлично выглядят и на iPhone, и на Android, и на планшетах.
+                    </div>
+                </div>
+
+                <!-- ВОПРОС 6 -->
+                <div style="margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    <div onclick="toggleFaq(this)" style="padding: 25px 0; display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+                        <span style="font-family: 'Unbounded', cursive; font-size: 1.2rem; font-weight: 600;">🤝 А если я не в Якутске?</span>
+                        <span style="font-size: 1.5rem; transition: 0.3s;">+</span>
+                    </div>
+                    <div class="faq-answer" style="padding: 0 0 25px 0; display: none; color: #a8a8a8; line-height: 1.7;">
+                        Работаю удалённо. Всё общение в Telegram, результат присылаю ссылкой.
+                    </div>
+                </div>
+
+            </div>
+    </div>
+    </section>
+
+    <!-- ПОДВАЛ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">LANDING</div>
+                <div>Якутск · 2026</div>
+                <div>Сайты за 24 часа</div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function showCategory(category) {
+            // Скрываем все категории
+            document.querySelectorAll('.category-content').forEach(el => {
+                el.style.display = 'none';
+            });
+
+            // Показываем выбранную
+            document.getElementById(category).style.display = 'block';
+
+            // Обновляем активную кнопку
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+         }
+        function toggleFaq(element) {
+        const answer = element.nextElementSibling;
+        const plus = element.querySelector('span:last-child');
+        
+        if (answer.style.display === 'none' || !answer.style.display) {
+            answer.style.display = 'block';
+            plus.textContent = '−';
+        } else {
+            answer.style.display = 'none';
+            plus.textContent = '+';
+        }
+    }
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
